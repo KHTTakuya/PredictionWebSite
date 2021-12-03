@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Complete!{% endblock %}
+
+{% block content %}
+    <div class="container pb-5 " style="height: 900px; padding-top: 100px">
+        <h1 class="text-center">送信完了</h1>
+        <div class="pt-3 fs-5">
+            <p class="text-center">内容確認後, 通常1-2営業日までにご返信をさせていただきます。</p>
+        </div>
+        <div class="d-grid gap-2 col-6 mx-auto pb-4">
+            <a href="{% url 'index' %}" class="btn btn-lg btn-secondary fw-bold bg-white text-secondary mb-5 mt-3 btn-lg">
+                ホームに戻る
+            </a>
+        </div>
+    </div>
+{% endblock %}

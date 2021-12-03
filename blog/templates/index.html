@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Proheter{% endblock %}
+{#課題は@mediaが使えてないので使えるようにする。#}
+
+{% block content %}
+    <div class="container-lg main-box">
+        <h1 class="text-center brand-name" style="font-size: 128px !important;">Proheter</h1>
+        <p class="lead text-center">
+            Proheterは独自AIのシステムを用いた競馬の予想サイトです。
+            <br>あなたの予想をより確かなものにしてください。
+        </p>
+        <p class="lead text-center">
+          <a href="{% url 'predict' %}" class="btn btn-lg btn-secondary fw-bold bg-white text-secondary">Start Predict</a>
+        </p>
+    </div>
+{% endblock %}

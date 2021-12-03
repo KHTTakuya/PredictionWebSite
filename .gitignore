@@ -1,0 +1,13 @@
+# venvfile
+venv/
+
+### OSX ###
+.DS_Store
+.AppleDouble
+.LSOverride
+
+### Python ###
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+.idea

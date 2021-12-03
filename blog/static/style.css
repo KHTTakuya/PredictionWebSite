@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat&display=swap');
+
+.brand-name {
+    font-family: 'Caveat', cursive;
+    font-weight: bold;
+    font-size: 32px !important;
+}
+
+.main-box {
+    height: 950px;
+    padding-top: 250px;
+}
+
+.content-box {
+    height: 150px;
+    width: 50%;
+}
+
