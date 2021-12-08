@@ -16,3 +16,8 @@
     width: 50%;
 }
 
+.mar-0 {
+    margin-left: 0; !important;
+    margin-right: 0; !important;
+}
+
