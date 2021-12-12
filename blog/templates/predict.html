@@ -1,52 +1,59 @@
 {% extends 'base.html' %}
+{% load extra_tags %}
 {% block title %}Predict{% endblock %}
 
 {% block content %}
     <div class="container">
+
         <div class="container" style="padding-top: 90px">
-            <div class="container">
-                <h1 class="border-bottom border-white">収支情報</h1>
+            <div class="container border-bottom border-white float-start">
+                <div class="float-start">
+                    <h1 class="text-start">収支情報</h1>
+                </div>
+                <div class="float-end">
+                    <p class="mb-0 text-end pt-4">{% now "Y/m/d H" %}時現在</p>
+                </div>
             </div>
             <div class="row">
-                <div class="col-lg pt-4">
+                <div class="col-lg pt-5">
                     <div class="container-fluid">
-                        <h3 class="border-bottom border-white mb-5">本日収支</h3>
+                        <h3 class="border-bottom border-white mb-3">本日収支</h3>
                         <div class="container-fluid border border-white rounded-3 border-4 content-box h-100 mar-0">
-                            <p class="fs-5 pt-3">収　支 :</p>
+                            <p class="fs-5 pt-3">収　支 : {{ total_today }}円</p>
                             <hr>
-                            <p class="fs-5 pt-1">的中数 :</p>
+                            <p class="fs-5 pt-1">的中数 : {{ today_win }}</p>
                             <hr>
-                            <p class="fs-5 pt-1">的中率 :</p>
+                            <p class="fs-5 pt-1">的中率 : {% div today_win today_count %}%</p>
                             <hr>
-                            <p class="fs-5 pt-1">回収率 :</p>
+                            <p class="fs-5 pt-1">回収率 : {% div total_today  today_count True %}%</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg pt-4">
+                <div class="col-lg pt-5">
                     <div class="container-fluid">
-                        <h3 class="border-bottom border-white mb-5">シーズン収支</h3>
+                        <h3 class="border-bottom border-white mb-3">シーズン収支</h3>
                         <div class="container-fluid border border-white rounded-3 border-4 content-box h-100 mar-0">
-                            <p class="fs-5 pt-3">収　支 :</p>
+                            <p class="fs-5 pt-3">収　支 : {{ total_season }}円</p>
                             <hr>
-                            <p class="fs-5 pt-1">的中数 :</p>
+                            <p class="fs-5 pt-1">的中数 : {{ season_win }}</p>
                             <hr>
-                            <p class="fs-5 pt-1">的中率 :</p>
+                            <p class="fs-5 pt-1">的中率 : {% div season_win season_count %}%</p>
                             <hr>
-                            <p class="fs-5 pt-1">回収率 :</p>
+                            <p class="fs-5 pt-1">回収率 : {% div total_season season_count True %}%</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg pt-4">
+                <div class="col-lg pt-5">
                     <div class="container-fluid">
-                        <h3 class="border-bottom border-white mb-5">総合収支</h3>
+                        <h3 class="border-bottom border-white mb-3">総合収支</h3>
                         <div class="container-fluid border border-white rounded-3 border-4 content-box h-100 mar-0">
-                            <p class="fs-5 pt-3">収　支 :</p>
+                            <p class="fs-5 pt-3">収　支 :  {{ total_pay.payoff__sum }}円</p>
                             <hr>
-                            <p class="fs-5 pt-1">的中数 :</p>
+                            <p class="fs-5 pt-1">的中数 :  {{ win_count }}</p>
                             <hr>
-                            <p class="fs-5 pt-1">的中率 :</p>
+                            <p class="fs-5 pt-1">的中率 :  {% div win_count total_count.title__count %}%</p>
                             <hr>
-                            <p class="fs-5 pt-1">回収率 :</p>
+                            <p class="fs-5 pt-1">回収率 : {% div total_pay.payoff__sum total_bet.bet__sum  %}%</p>
                         </div>
                     </div>
                 </div>
@@ -54,21 +61,85 @@
         </div>
         <div class="container">
             <div class="container mt-5">
-                <h1 class="border-bottom border-white">各レース予想</h1>
-                <div>
-                    <p>Race1</p>
-                    <p>Race2</p>
-                    <p>Race3</p>
+                <h1 class="border-bottom border-white">本日分レース予想</h1>
+                <div class="row">
+                    <div class="col-lg pt-5">
+                        {% if not place_list.0 %}
+                            <h3 class="border-bottom border-white mb-3">開催していません。</h3>
+                        {% else %}
+                            <h3 class="border-bottom border-white mb-3">{{ place_list.0 }}</h3>
+                        {% endif %}
+                        <div>
+                            {% if get_race1 == None %}
+                                <div class="container-fluid ps-0">
+                                    <h3>現在はありません。</h3>
+                                </div>
+                            {% else %}
+                                {#ここにレース詳細を記載#}
+                                <div>
+                                    {% for race in get_race1 %}
+                                    <h4 class="pt-2"><a href="{% url 'detail_predict' pk=race.pk %}">{{ race }}</a></h4>
+                                    <hr>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-lg pt-5">
+                        {% if not place_list.1 %}
+                            <h3 class="border-bottom border-white mb-3">開催していません。</h3>
+                        {% else %}
+                            <h3 class="border-bottom border-white mb-3">{{ place_list.1 }}</h3>
+                        {% endif %}
+                        <div>
+                            {% if get_race2 == None %}
+                                <div class="container-fluid ps-0">
+                                    <h3>現在はありません。</h3>
+                                </div>
+                            {% else %}
+                                {#ここにレース詳細を記載#}
+                                <div>
+                                    {% for race in get_race2 %}
+                                    <h4 class="pt-2"><a href="{% url 'detail_predict' pk=race.pk %}">{{ race }}</a></h4>
+                                    <hr>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-lg pt-5">
+                        {% if not place_list.2 %}
+                            <h3 class="border-bottom border-white mb-3">開催していません。</h3>
+                        {% else %}
+                            <h3 class="border-bottom border-white mb-3">{{ place_list.2 }}</h3>
+                        {% endif %}
+                        <div>
+                            {% if get_race3 == None %}
+                                <div class="container-fluid ps-0">
+                                    <h3>現在はありません。</h3>
+                                </div>
+                            {% else %}
+                                {#ここにレース詳細を記載#}
+                                <div>
+                                    {% for race in get_race3 %}
+                                    <h4 class="pt-2"><a href="{% url 'detail_predict' pk=race.pk %}">{{ race }}</a></h4>
+                                    <hr>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+
                 </div>
             </div>
             <div class="container mt-5 pb-5">
                 <h1 class="border-bottom border-white">過去収支情報</h1>
-                <div>
-                    <p>Race1</p>
-                    <p>Race2</p>
-                    <p>Race3</p>
+                <div class="pb-5">
+                    <h3>現在はありません。</h3>
+                    <h5>※後ほど追加予定</h5>
                 </div>
             </div>
         </div>
     </div>
+
 {% endblock %}

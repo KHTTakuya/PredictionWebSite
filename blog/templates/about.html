@@ -7,38 +7,15 @@
             <h1 class="border-bottom border-white">About Site - このサイトについて</h1>
             <div class="fs-4 mt-3">
                 <p>このサイトは独自のAI（機械学習）を用いて予想したデータを公開しています。</p>
-                <p>使用言語については下のUsed Techの欄をご覧ください。</p>
+                <p>使用言語については下のUse Techの欄をご覧ください。</p>
             </div>
         </div>
-        <div class="container pt-5 mb-5">
-            <h1 class="border-bottom border-white">Use Tech - 使用言語</h1>
-            <table class="table table-dark fs-3 pt-4 mt-3">
-                <thead>
-                    <tr>
-                        <th scope="col"></th>
-                        <th scope="col">MySite</th>
-                        <th scope="col">Model</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th scope="col">Main Language</th>
-                        <th>Python</th>
-                        <th>Python</th>
-                    </tr>
-                    <tr>
-                        <th scope="col">Main Frame Work</th>
-                        <th>Django, Bootstrap</th>
-                        <th>Pandas, Tensorflow</th>
-                    </tr>
-                    <tr>
-                        <th scope="col">GitHub</th>
-                        <th><a href="#" class="btn btn-lg btn-secondary fw-bold bg-white text-secondary"><i class="bi bi-github"></i>Github</a></th>
-                        <th><a href="#" class="btn btn-lg btn-secondary fw-bold bg-white text-secondary"><i class="bi bi-github ps-2"></i>Github</a></th>
-                    </tr>
-
-                </tbody>
-            </table>
+        <div class="container pt-4 mb-5">
+            <h1 class="border-bottom border-white">How To Use - 使用方法</h1>
+            <div class="fs-4 mt-3">
+                <p>このサイトは独自のAI（機械学習）を用いて予想したデータを公開しています。</p>
+                <p>使用言語については下のUsed Techの欄をご覧ください。</p>
+            </div>
         </div>
         <div class="container pt-5 pb-5">
             <h1 class="border-bottom border-white">Disclaimer - 免責条項</h1>
@@ -65,7 +42,36 @@
                 <a href="{% url 'contact' %}" class="btn btn-lg btn-secondary fw-bold bg-white text-secondary">お問い合わせフォーム</a>
             </div>
         </div>
+        <div class="container pt-5 pb-5">
+            <h1 class="border-bottom border-white">Use Tech - 使用言語</h1>
+            <table class="table table-dark fs-3 pt-4 mt-3">
+                <thead>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col">MySite</th>
+                        <th scope="col">Model</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="col">Main Language</th>
+                        <th>Python</th>
+                        <th>Python</th>
+                    </tr>
+                    <tr>
+                        <th scope="col">Main Frame Work</th>
+                        <th>Django, Bootstrap</th>
+                        <th>Pandas, Tensorflow</th>
+                    </tr>
+                    <tr>
+                        <th scope="col">GitHub</th>
+                        <th><a href="#" class="btn btn-lg btn-secondary fw-bold bg-white text-secondary"><i class="bi bi-github"></i>Github</a></th>
+                        <th><a href="#" class="btn btn-lg btn-secondary fw-bold bg-white text-secondary"><i class="bi bi-github"></i>Github</a></th>
+                    </tr>
 
+                </tbody>
+            </table>
+        </div>
     </div>
 
 {% endblock %}

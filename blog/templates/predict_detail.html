@@ -1,0 +1,162 @@
+{% extends 'base.html' %}
+{% block title %}レース詳細-{{ post.title }}{% endblock %}
+
+{% block content %}
+    <div class="container pt-5">
+        <div class="container">
+            {# ここは予想時の番号など #}
+            <div class="container pt-3">
+                <h1>{{ post.race_time.date }} {{ post.title }} 本予想</h1>
+                <hr>
+            </div>
+            <div class="container pt-3 pb-5">
+                <table class="table table-dark fs-3 pt-4 mt-3 table-bordered border-white ">
+                    <thead>
+                        <tr class="text-center border-3">
+                            <th class="col">予想印</th>
+                            <th class="col">{{ post.title }} / 馬番</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="text-center">
+                            <th class="col">◎</th>
+                            <td class="col fs-3 fw-bold">{{ post.horse_1 }}</td>
+                        </tr>
+                        <tr class="text-center">
+                            <th class="col">〇</th>
+                            <td class="col fs-3 fw-bold">{{ post.horse_2 }}</td>
+                        </tr>
+                        <tr class="text-center">
+                            <th class="col">▲</th>
+                            <td class="col fs-3 fw-bold">{{ post.horse_3 }}</td>
+                        </tr>
+                        <tr class="text-center">
+                            <th class="col">△</th>
+                            <td class="col fs-3 fw-bold">{{ post.horse_4 }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="container pt-2 mb-1">
+               <h2>本予想のみかた</h2>
+               <hr>
+                <div class="container">
+                    <h3>・予想印のみかた</h3>
+                    <div class="container pt-3 pb-2">
+                        <h4>◎：本命</h4>
+                        <p class="fs-5">最も勝つ確率が高い馬。</p>
+                    </div>
+                    <div class="container pt-2 pb-2">
+                        <h4>○：対抗</h4>
+                        <p class="fs-5">本命に対抗できる馬。</p>
+                    </div>
+                    <div class="container pt-2 pb-2">
+                        <h4>▲：単穴</h4>
+                        <p class="fs-5">◎や○の馬に勝てる能力がある馬。</p>
+                    </div>
+                    <div class="container pt-2 pb-2">
+                        <h4>△：連下</h4>
+                        <p class="fs-5">2・3着に来る可能性がある馬。</p>
+                    </div>
+                </div>
+            </div>
+            <div class="container pt-2 mb-5">
+                <h3>・賭け方</h3>
+                <div class="container pt-3 pb-2">
+                    <h4>単勝・複勝</h4>
+                    <p class="fs-5">◎〇▲△：4通り</p>
+                </div>
+                <div class="container pt-3 pb-2">
+                    <h4>馬連・馬単・ワイド</h4>
+                    <p class="fs-5">◎-〇▲△：3通り</p>
+                    <p class="fs-5">◎=〇▲△：6通り、(馬単マルチの場合)</p>
+                </div>
+                <div class="container pt-3 pb-2">
+                    <h4>3連複・3連単</h4>
+                    <p class="fs-5">◎-〇▲△-〇▲△：3通り(3連複の場合)</p>
+                    <p class="fs-5">◎-〇▲△-〇▲△：6通り(3連単の場合)</p>
+                    <p class="fs-5">◎=〇▲△=〇▲△：180通り(3連単マルチの場合)</p>
+                </div>
+            </div>
+        </div>
+        <div class="container pb-5">
+            {# ここは結果 #}
+            <div class="container">
+                <h1>レース結果</h1>
+                <hr>
+            </div>
+            <div class="container">
+                {% for result in queryset %}
+                    {% if post.title == result.title and post.place == result.place %}
+                        {% if post.race_num == result.race_num and post.race_time.date == result.race_time.date %}
+                            <table class="table table-dark fs-3 pt-5 mt-5 table-bordered border-white ">
+                                <thead>
+                                    <tr class="text-center border-3">
+                                        <th class="col">結果</th>
+                                        <th class="col">{{ result.title }} / 馬番</th>
+                                        <th class="col">予想印</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="text-center">
+                                        <th class="col">1着</th>
+                                        <td class="col fs-3 fw-bold">{{ result.result_one_win }}</td>
+                                        {% if post.horse_1 == result.result_one_win %}
+                                            <td class="col">◎</td>
+                                        {% elif post.horse_2 == result.result_one_win%}
+                                            <td class="col">〇</td>
+                                        {% elif post.horse_3 == result.result_one_win%}
+                                            <td class="col">▲</td>
+                                        {% elif post.horse_4 == result.result_one_win%}
+                                            <td class="col">△</td>
+                                        {% else %}
+                                            <td class="col"></td>
+                                        {% endif %}
+                                    </tr>
+                                    <tr class="text-center">
+                                        <th class="col">2着</th>
+                                        <td class="col fs-3 fw-bold">{{ result.result_two_win }}</td>
+                                        {% if post.horse_1 == result.result_two_win %}
+                                            <td class="col">◎</td>
+                                        {% elif post.horse_2 == result.result_two_win %}
+                                            <td class="col">〇</td>
+                                        {% elif post.horse_3 == result.result_two_win %}
+                                            <td class="col">▲</td>
+                                        {% elif post.horse_4 == result.result_two_win %}
+                                            <td class="col">△</td>
+                                        {% else %}
+                                            <td class="col"></td>
+                                        {% endif %}
+                                    </tr>
+                                    <tr class="text-center">
+                                        <th class="col">3着</th>
+                                        <td class="col fs-3 fw-bold">{{ result.result_thr_win }}</td>
+                                        {% if post.horse_1 == result.result_thr_win %}
+                                            <td class="col">◎</td>
+                                        {% elif post.horse_2 == result.result_thr_win %}
+                                            <td class="col">〇</td>
+                                        {% elif post.horse_3 == result.result_thr_win %}
+                                            <td class="col">▲</td>
+                                        {% elif post.horse_4 == result.result_thr_win %}
+                                            <td class="col">△</td>
+                                        {% else %}
+                                            <td class="col"></td>
+                                        {% endif %}
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="pt-3">
+                                <h3>的中</h3>
+                                <p class="fs-5">単勝：{{ result.win }}円</p>
+                                <p class="fs-5">複勝：{{ result.win_show }}円</p>
+                                <p class="fs-5">その他的中：{{ result.comment }}</p>
+                            </div>
+
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
