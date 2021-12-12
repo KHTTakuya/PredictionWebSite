@@ -1,1 +1,1 @@
-web: gunicorn keibasite.wsgi --log-file - 
+web: gunicorn keibasite.wsgi --log-file -
