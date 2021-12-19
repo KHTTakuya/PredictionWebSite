@@ -3,9 +3,16 @@
 {% block title %}Predict{% endblock %}
 
 {% block content %}
+    {% if prediction.count == 0 %}
+        <div class="container">
+            <div class="container" style="padding-top: 90px; height: 800px">
+                <h1>まだ予想したレースは一個もありません。</h1>
+                <p class="fs-5 pt-2">予想した際はこちらに表示されますのでしばらくお待ちください。</p>
+            </div>
+        </div>
+    {% else %}
     <div class="container">
-
-        <div class="container" style="padding-top: 90px">
+        <div class="container mb-5" style="padding-top: 90px">
             <div class="container border-bottom border-white float-start">
                 <div class="float-start">
                     <h1 class="text-start">収支情報</h1>
@@ -132,14 +139,11 @@
 
                 </div>
             </div>
-            <div class="container mt-5 pb-5">
-                <h1 class="border-bottom border-white">過去収支情報</h1>
-                <div class="pb-5">
-                    <h3>現在はありません。</h3>
-                    <h5>※後ほど追加予定</h5>
-                </div>
+            <div class="container mt-5 pb-5" style="height: 200px">
+
             </div>
         </div>
     </div>
+    {% endif %}
 
 {% endblock %}

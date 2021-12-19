@@ -23,6 +23,7 @@ class BetToReturn(models.Model):
     def __str__(self):
         return self.title
 
+
 class Prediction(models.Model):
     title = models.CharField(max_length=100)
     place = models.CharField(max_length=100)
