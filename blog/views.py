@@ -25,7 +25,7 @@ def predict(request):
     bet_to_return = BetToReturn.objects.all()
 
     today = date.today()
-    seasons = date(2021, 12, 31)
+    seasons = date(2022, 12, 31)
 
     total_bet = bet_to_return.aggregate(Sum('bet'))
     total_pay = bet_to_return.aggregate(Sum('payoff'))
@@ -49,7 +49,7 @@ def predict(request):
             total_today += pay.payoff
             if pay.win > 0:
                 today_win += 1
-        elif pay.race_time.date() < seasons:
+        elif date(2022, 1, 1) <= pay.race_time.date() < seasons:
             seasons_count += 1
             total_season += pay.payoff
             if pay.win > 0:
