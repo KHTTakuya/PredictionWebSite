@@ -18,5 +18,6 @@ blog/__pycache__/
 venv/
 
 blog/tests
+keibasite/settings_secret.py
 
 db.sqlite3
